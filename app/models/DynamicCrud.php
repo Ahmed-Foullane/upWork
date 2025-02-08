@@ -24,11 +24,9 @@ class DynamicCrud {
         $col_value = implode(", :", $columns);
         $col_prepare = implode(", ", $columns);
         $query = 'INSERT INTO ' . $this->table . ' (' . $col_prepare . ') VALUES (:' . $col_value . ')';
-        var_dump ($column);
-        die;
-        $result->execute($column);
         $result = $this->conn->prepare($query);
-        
+        $result->execute($column);
+        return $result;
     }
 
     public function update($column) {
@@ -62,7 +60,7 @@ class DynamicCrud {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $col_set . ' = :' . $col_set;
         $result = $this->conn->prepare($query);
         $result->execute($column);
-
         return $result->fetchAll(PDO::FETCH_CLASS, $className);
     }
+
 }

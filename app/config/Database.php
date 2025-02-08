@@ -4,20 +4,18 @@ use PDOException;
 use PDO;
 
 class Database {
-    private const DSN = 'mysql:host=localhost;dbname=crud';
+    private const DSN = 'pgsql:host=localhost;port=5432;dbname=up_work'; 
     private $conn;
     private static $instance;
+    
     public function __construct() {
-        
         try {
             
-            $this->conn = new PDO(self::DSN, "root", "");
-            
+            $this->conn = new PDO(self::DSN, "postgres", "12345");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "error";
-            echo 'Connection failed: ' . $e->getMessage();
+            echo "Connection failed: " . $e->getMessage();
         }
     }
 
@@ -31,6 +29,4 @@ class Database {
     public function getConnection() {
         return $this->conn; 
     }
-
 }
-

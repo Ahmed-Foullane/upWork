@@ -2,13 +2,12 @@
 namespace app\config;
 use PDOException;
 use PDO;
-
 class Database {
     private const DSN = 'pgsql:host=localhost;port=5432;dbname=up_work'; 
     private $conn;
     private static $instance;
     
-    public function __construct() {
+    private function __construct() {
         try {
             
             $this->conn = new PDO(self::DSN, "postgres", "12345");

@@ -1,5 +1,7 @@
 <?php
+
 namespace app\routers;
+
 class Routes
 {
     const DEFAULT_CONTROLLER = 'home';
@@ -16,6 +18,9 @@ class Routes
             $controllerClass = ucwords($url[0]);
             if (class_exists('\\app\\controllers\\' . $controllerClass . 'Controller')) {
                 $this->controller = $controllerClass;
+            } else if(file_exists("../app/views/pages/". $url[0] . ".php" )) {
+                require "../app/views/pages/". $url[0]. ".php" ;
+                die;
             }
         }
         $controllerClass = '\\app\\controllers\\' . $this->controller . 'Controller';
@@ -35,7 +40,7 @@ class Routes
     private function getUrl(): array
     {
         $uri = $_SERVER['PATH_INFO'] ?? '/';
-        $uri = trim($uri, '/'); 
+        $uri = trim($uri, '/');
         return explode('/', $uri);
     }
     private function getBasePaths()

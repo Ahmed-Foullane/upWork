@@ -4,12 +4,13 @@ create DATABASE up_work;
 
  CREATE TABLE categorie (
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(50)
+    name VARCHAR(50),
+    description TEXT
  ) ;
  CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(50) UNIQUE
-
+    name VARCHAR(50),
+    description TEXT
  );
  CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
  CREATE TABLE offre(
@@ -30,11 +31,8 @@ create DATABASE up_work;
     FOREIGN offre_id  REFERENCES offre (id);  
  );
 
- CREATE TABLE role(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
-    description VARCHAR(50)
- );
+ CREATE TYPE role AS ENUM ('client','freelance','admin');
+
 CREATE TABLE User (
     id SERIAL PRIMARY KEY ,
     first_name varchar(50),
@@ -43,8 +41,7 @@ CREATE TABLE User (
     password varchar (50),
     photo VARCHAR (50),
     bio VARCHAR (255),
-    role_id INT,
-    Foreign Key (role_id) REFERENCES role (id)
+   role role
 );
 CREATE TABLE competence(
     id SERIAL PRIMARY KEY ,
@@ -58,8 +55,6 @@ CREATE TABLE Avis (
 );
 CREATE TABLE projet (
     id SERIAL PRIMARY KEY ,
-    
-
 );
 CREATE TYPE status AS ENUM ('payee','non payee');
 CREATE TABLE paiement (
@@ -70,3 +65,5 @@ CREATE TABLE paiement (
 )
 
 
+drop table tag ;
+drop table categorie ;

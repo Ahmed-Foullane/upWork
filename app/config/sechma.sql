@@ -1,18 +1,21 @@
--- Active: 1739030975316@@127.0.0.1@5432@up_work
+-- Active: 1739025664745@@127.0.0.1@5432@up_work
 
 create DATABASE up_work;
 
  CREATE TABLE categorie (
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(50)
+    name VARCHAR(50),
+   
  ) ;
- CREATE TABLE tag (
+
+SELECT * FROM categorie;
+
+CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
     name VARCHAR(50) UNIQUE
-
  );
  CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
- CREATE TABLE offre(
+ CREATE TABLE projet(
     id SERIAL PRIMARY KEY ,
     title VARCHAR (50),
     description TEXT,
@@ -21,21 +24,20 @@ create DATABASE up_work;
     date_fin date,
     status status ,
     categorie_id int,
-    FOREIGN categirie_id  REFERENCES Categorie (id);
+    FOREIGN KEY  (categorie_id)  REFERENCES Categorie (id),
+    client_id int,
+    FOREIGN KEY  (client_id)  REFERENCES Users (id)
  );
- CREATE TABLE offre_tag(
+ CREATE TABLE projet_tag(
     tag_id INT,
-    offre_id INT ,
-    FOREIGN tag_id  REFERENCES tag (id);
-    FOREIGN offre_id  REFERENCES offre (id);  
+    projet_id INT ,
+    FOREIGN KEY (tag_id)  REFERENCES tag (id),
+    FOREIGN KEY (projet_id)  REFERENCES projet (id) 
  );
 
- CREATE TABLE role(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
-    description VARCHAR(50)
- );
-CREATE TABLE User (
+ CREATE TYPE role AS ENUM ('client','freelance','admin');
+
+CREATE TABLE Users (
     id SERIAL PRIMARY KEY ,
     first_name varchar(50),
     last_name varchar(50),
@@ -43,8 +45,7 @@ CREATE TABLE User (
     password varchar (50),
     photo VARCHAR (50),
     bio VARCHAR (255),
-    role_id INT,
-    Foreign Key (role_id) REFERENCES role (id)
+   role role
 );
 CREATE TABLE competence(
     id SERIAL PRIMARY KEY ,
@@ -58,8 +59,6 @@ CREATE TABLE Avis (
 );
 CREATE TABLE projet (
     id SERIAL PRIMARY KEY ,
-    
-
 );
 CREATE TYPE status AS ENUM ('payee','non payee');
 CREATE TABLE paiement (
@@ -70,3 +69,7 @@ CREATE TABLE paiement (
 )
 
 
+drop table tag ;
+drop table categorie ;
+drop table projet ;
+drop table projet_tag ;

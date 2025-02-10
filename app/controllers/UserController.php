@@ -19,6 +19,7 @@ class UserController {
         $email = $_POST["email"];
         
         $this->userModel->setUser($username, $email);
+
     }
 
     public function getUsers(){   

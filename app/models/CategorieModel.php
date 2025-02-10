@@ -3,8 +3,9 @@ namespace app\Models;
 use app\models\DynamicCrud;
 
 class CategorieModel {
-    private $id;
-    private $name;
+    protected $crud;
+    private  int $id;
+    private string $name;
 
     public function __construct() {
         $this->crud = new DynamicCrud("categorie");

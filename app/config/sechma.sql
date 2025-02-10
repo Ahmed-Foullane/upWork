@@ -12,7 +12,8 @@ SELECT * FROM categorie;
 
 CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(50) UNIQUE
+    name VARCHAR(50) 
+    description TEXT
  );
  CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
  CREATE TABLE projet(
@@ -56,9 +57,6 @@ CREATE TABLE Avis (
     id SERIAL PRIMARY KEY,
     rating float ,
     date date
-);
-CREATE TABLE projet (
-    id SERIAL PRIMARY KEY ,
 );
 CREATE TYPE status AS ENUM ('payee','non payee');
 CREATE TABLE paiement (

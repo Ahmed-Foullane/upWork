@@ -18,9 +18,9 @@ class UserController {
         $username = $_POST["username"];
         $email = $_POST["email"];
         
-        $this->userModel->setUser($username, $email);
-
-    }
+        $this->userModel->setUser($username, email: $email);
+        header ("location: /user");
+     }
 
     public function getUsers(){   
        var_dump($this->userModel->getAllUsers());

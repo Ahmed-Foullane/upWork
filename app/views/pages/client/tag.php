@@ -213,7 +213,7 @@
       <button class="add-btn" onclick="document.getElementById('formModal').classList.add('active')">+ Nouveau Tag</button>
     </div>
 
-    <!-- Modal Form -->
+    <!-- Modal Form for Adding -->
     <div id="formModal" class="modal">
       <div class="form-container">
         <button class="close-btn" onclick="document.getElementById('formModal').classList.remove('active')">&times;</button>
@@ -221,12 +221,12 @@
         <form method='POST' action="/Tag/addTag">
           <div class="form-group">
             <label>Nom du tag</label>
-            <input type="text" name ="name" placeholder="Entrez le nom du tag">
+            <input type="text" name="name" placeholder="Entrez le nom du tag">
           </div>
 
           <div class="form-group">
             <label>Description</label>
-            <textarea name ="description" rows="4" placeholder="Décrivez le tag"></textarea>
+            <textarea name="description" rows="4" placeholder="Décrivez le tag"></textarea>
           </div>
 
           <button type="submit" class="submit-btn">Ajouter le tag</button>
@@ -240,49 +240,65 @@
           <tr>
             <th>Tag</th>
             <th>Description</th>
-            <th>Date de création</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><span class="tag-name">React</span></td>
-            <td>Bibliothèque JavaScript pour créer des interfaces utilisateur</td>
-            <td>09/02/2024</td>
-            <td class="actions">
-              <button class="edit-btn">Modifier</button>
-              <button class="delete-btn">Supprimer</button>
-            </td>
-          </tr>
-          <tr>
-            <td><span class="tag-name">Design</span></td>
-            <td>Conception d'interfaces et d'expériences utilisateur</td>
-            <td>09/02/2024</td>
-            <td class="actions">
-              <button class="edit-btn">Modifier</button>
-              <button class="delete-btn">Supprimer</button>
-            </td>
-          </tr>
-          <tr>
-            <td><span class="tag-name">Node.js</span></td>
-            <td>Environnement d'exécution JavaScript côté serveur</td>
-            <td>09/02/2024</td>
-            <td class="actions">
-              <button class="edit-btn">Modifier</button>
-              <button class="delete-btn">Supprimer</button>
-            </td>
-          </tr>
+        <?php foreach ($tags as $tag): ?>
+  <tr>
+    <td><span class="tag-name"><?= $tag->getName() ?></span></td>
+    <td><?= $tag->getDescription() ?></td>
+    <td class="actions">
+      <button class="edit-btn" onclick="openUpdateModal(<?=$tag->getId() ?>, '<?= $tag->getName() ?>', '<?= $tag->getDescription() ?>')">Update</button>
+      <button class="delete-btn"><a href="/Tag/deleteTag?id=<?= $tag->getId() ?>">Supprimer</a></button>
+    </td>
+  </tr>
+<?php endforeach ?>
+
         </tbody>
       </table>
     </div>
   </div>
 
+  <!-- Modal Form for Updating -->
+  <div id="updateModal" class="modal">
+    <div class="form-container">
+      <button class="close-btn" onclick="document.getElementById('updateModal').classList.remove('active')">&times;</button>
+      <h2>Modifier le tag</h2>
+      <form method="POST" action="/Tag/updateTag">
+        <input type="hidden" name="id" id="update-id">
+
+        <div class="form-group">
+          <label>Nom du tag</label>
+          <input type="text" name="name" id="update-name" placeholder="Entrez le nom du tag">
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" id="update-description" rows="4" placeholder="Décrivez le tag"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Mettre à jour le tag</button>
+      </form>
+    </div>
+  </div>
+
   <script>
-    // Fermer le modal en cliquant en dehors
-    document.querySelector('.modal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        this.classList.remove('active');
-      }
+    // Open the update modal with pre-filled data
+    function openUpdateModal(id, name, description) {
+      document.getElementById('updateModal').classList.add('active');
+      document.getElementById('update-id').value = id;
+      document.getElementById('update-name').value = name;
+      document.getElementById('update-description').value = description;
+    }
+
+    // Close the modal when clicking outside of it
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('active');
+        }
+      });
     });
   </script>
 </body>

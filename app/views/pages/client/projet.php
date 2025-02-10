@@ -258,28 +258,28 @@
         <form>
           <div class="form-group">
             <label>Titre</label>
-            <input type="text" placeholder="Entrez le titre du projet">
+            <input type="text" name="title" placeholder="Entrez le titre du projet">
           </div>
 
           <div class="form-group">
             <label>Description</label>
-            <textarea rows="4" placeholder="Décrivez votre projet"></textarea>
+            <textarea name="description" rows="4" placeholder="Décrivez votre projet"></textarea>
           </div>
 
           <div class="form-group">
             <label>Budget</label>
-            <input type="number" placeholder="Entrez le budget">
+            <input name="budget" type="number" placeholder="Entrez le budget">
           </div>
 
           <div class="dates">
             <div class="form-group">
               <label>Date de début</label>
-              <input type="date">
+              <input name="date_debut" type="date">
             </div>
 
             <div class="form-group">
               <label>Date de fin</label>
-              <input type="date">
+              <input  name="date_fin" type="date">
             </div>
           </div>
 

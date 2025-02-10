@@ -1,4 +1,4 @@
--- Active: 1739025664745@@127.0.0.1@5432@up_work
+-- Active: 1739030975316@@127.0.0.1@5432@up_work
 
 create DATABASE up_work;
 
@@ -16,19 +16,19 @@ CREATE TABLE tag (
     description TEXT
  );
  CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
- CREATE TABLE projet(
-    id SERIAL PRIMARY KEY ,
-    title VARCHAR (50),
+CREATE TABLE projet (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(50),
     description TEXT,
-    budget DECIMAL (10,2),
-    date_debut Date ,
-    date_fin date,
-    status status ,
-    categorie_id int,
-    FOREIGN KEY  (categorie_id)  REFERENCES Categorie (id),
-    client_id int,
-    FOREIGN KEY  (client_id)  REFERENCES Users (id)
- );
+    budget DECIMAL(10,2),
+    date_debut DATE,
+    date_fin DATE,
+    status status DEFAULT 'en cours',  -- Default value for status is 'en cours'
+    categorie_id INT,
+    FOREIGN KEY (categorie_id) REFERENCES Categorie(id),
+    client_id INT,
+    FOREIGN KEY (client_id) REFERENCES Users(id)
+);
  CREATE TABLE projet_tag(
     tag_id INT,
     projet_id INT ,

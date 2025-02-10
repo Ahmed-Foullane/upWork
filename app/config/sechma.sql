@@ -1,4 +1,4 @@
--- Active: 1739030975316@@127.0.0.1@5432@up_work
+-- Active: 1739025664745@@127.0.0.1@5432@up_work
 
 create DATABASE up_work;
 
@@ -6,10 +6,12 @@ create DATABASE up_work;
     id SERIAL PRIMARY KEY ,
     name VARCHAR(50)
  ) ;
- CREATE TABLE tag (
+
+SELECT * FROM categorie;
+
+CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
     name VARCHAR(50) UNIQUE
-
  );
  CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
  CREATE TABLE offre(

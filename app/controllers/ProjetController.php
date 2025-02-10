@@ -13,6 +13,10 @@ class ProjetController {
     public function index(){
         $projet = new ProjetController();
          $projets = $projet->getProjet();
+         $Categorie = new CategorieModel();
+        $categories = $Categorie->getAllCategories();
+        $tag = new TagController ();
+        $tags =$tag->getAllTag();
         include_once '..\app\views\pages\client\Projet.php';
     }
     public function getProjet(){   

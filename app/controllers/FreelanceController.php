@@ -3,7 +3,7 @@ namespace app\controllers;
 use app\models\FreelanceModel;
 
 class FreelanceController{
-    private $freelanceModel;
+    protected $freelanceModel;
 
     public function __construct(){
 $this->freelanceModel = new FreelanceModel();

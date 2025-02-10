@@ -1,6 +1,7 @@
 <?php
 namespace app\Models;
 use app\config\Database;
+use PDO;
 class FreelanceModel {
     protected $conn;
 

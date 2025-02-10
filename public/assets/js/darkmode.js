@@ -1,7 +1,24 @@
 let toggleBtn = document.getElementById('toggle-btn');
 let body = document.body;
 let darkMode = localStorage.getItem('dark-mode');
-console.log("h");
+let updateForm = document.querySelector('.form-container');
+let inputUpdate = document.querySelector('form .update')
+let inputUpdateId = document.querySelector('form .id')
+
+
+function handelShowUpdateForm (show, value, id){
+   console.log(inputUpdate);
+    show ? updateForm.style.display = "flex" :  updateForm.style.display = "none";
+    setValue(value)
+    setId(id)
+}
+
+function setValue(vlaue){
+   inputUpdate.value = vlaue;
+}
+function setId(id){
+   inputUpdateId.value = id;
+}
 
 const enableDarkMode = () =>{
    toggleBtn.classList.replace('fa-sun', 'fa-moon');
@@ -14,6 +31,7 @@ const disableDarkMode = () =>{
    body.classList.remove('dark');
    localStorage.setItem('dark-mode', 'disabled');
 }
+
 
 if(darkMode === 'enabled'){
    enableDarkMode();

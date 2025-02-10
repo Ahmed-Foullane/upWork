@@ -552,6 +552,7 @@ header .flex .icons button:hover{
    position: relative;
 }
 
+
 .courses .box-container .box .thumb span{
    position: absolute;
    top:1rem; left: 1rem;
@@ -1453,4 +1454,26 @@ button:hover {
 .video-description {
    color: #666;
    font-size: 0.9em;
+}
+
+
+.updat-form{
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 150%;
+}
+
+.form-container{
+   position: absolute;
+   transform: translate(-50%, -50%);
+   top: 50%;
+   left: 50%;
+   display: none;
+}
+
+.form-container form {
+   border: #22222267 1px solid;
+   border-radius: 15px;
+   box-shadow: 4px 3px 2px rgba(0,0,0,.3);
 }

@@ -5,7 +5,7 @@ create DATABASE up_work;
  CREATE TABLE categorie (
     id SERIAL PRIMARY KEY ,
     name VARCHAR(50),
-    description TEXT
+   
  ) ;
  CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
@@ -13,7 +13,7 @@ create DATABASE up_work;
     description TEXT
  );
  CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
- CREATE TABLE offre(
+ CREATE TABLE projet(
     id SERIAL PRIMARY KEY ,
     title VARCHAR (50),
     description TEXT,
@@ -22,18 +22,20 @@ create DATABASE up_work;
     date_fin date,
     status status ,
     categorie_id int,
-    FOREIGN categirie_id  REFERENCES Categorie (id);
+    FOREIGN KEY  (categorie_id)  REFERENCES Categorie (id),
+    client_id int,
+    FOREIGN KEY  (client_id)  REFERENCES Users (id)
  );
- CREATE TABLE offre_tag(
+ CREATE TABLE projet_tag(
     tag_id INT,
-    offre_id INT ,
-    FOREIGN tag_id  REFERENCES tag (id);
-    FOREIGN offre_id  REFERENCES offre (id);  
+    projet_id INT ,
+    FOREIGN KEY (tag_id)  REFERENCES tag (id),
+    FOREIGN KEY (projet_id)  REFERENCES projet (id) 
  );
 
  CREATE TYPE role AS ENUM ('client','freelance','admin');
 
-CREATE TABLE User (
+CREATE TABLE Users (
     id SERIAL PRIMARY KEY ,
     first_name varchar(50),
     last_name varchar(50),
@@ -67,3 +69,5 @@ CREATE TABLE paiement (
 
 drop table tag ;
 drop table categorie ;
+drop table projet ;
+drop table projet_tag ;

@@ -23,5 +23,12 @@ class CategoryController {
         $this->categoryModel->deleteCategori($id);
         header("location: /category");
     }
+
+    public function updateCategory(){
+       $name = $_POST["name"];
+       $id = $_POST["id"];
+        $this->categoryModel->updateCategory($name, $id);
+        header("location: /category");
+    }
 }
 

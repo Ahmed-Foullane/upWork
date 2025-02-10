@@ -39,6 +39,10 @@ class CategorieModel {
         return  $this->crud->delete(["id" => $id]);
       }
 
+    public function updateCategory($name, $id){
+        $this->crud->update(["id"=> $id, "name"=> $name]);
+    }
+
     // public function __toString() {
     //     return "Categorie{id=" . $this->id . ", name='" . $this->name . "'}";
     // }

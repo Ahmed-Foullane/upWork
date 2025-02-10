@@ -12,8 +12,10 @@ SELECT * FROM categorie;
 
 CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
+
     name VARCHAR(50) 
     description TEXT
+
  );
  CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
  CREATE TABLE projet(

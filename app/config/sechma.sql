@@ -1,10 +1,10 @@
--- Active: 1739025664745@@127.0.0.1@5432@up_work
+-- Active: 1739113479184@@127.0.0.1@5432@up_work
 
 create DATABASE up_work;
 
  CREATE TABLE categorie (
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(50),
+    name VARCHAR(50)
    
  ) ;
 
@@ -12,7 +12,7 @@ SELECT * FROM categorie;
 
 CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(50) 
+    name VARCHAR(50) ,
     description TEXT
  );
  CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
@@ -63,8 +63,25 @@ CREATE TABLE paiement (
     id SERIAL PRIMARY KEY ,
     montant DOUBLE,
     date date,
-    status status,
-)
+    status status
+);
+
+INSERT INTO categorie (name) 
+VALUES ('Web Development');
+INSERT INTO tag (name, description) 
+VALUES ('Frontend', 'Frontend web development technologies');
+CREATE TABLE tag (
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR(50) ,
+    description TEXT
+ );
+
+INSERT INTO Users (first_name, last_name, email, password, photo, bio, role)
+VALUES ('John', 'Doe', 'john.doe@example.com', 'password123', 'john_doe.jpg', 'A passionate web developer', 'freelance');
+INSERT INTO projet (title, description, budget, date_debut, date_fin, status, categorie_id, client_id)
+VALUES 
+('Website Redesign', 'A complete redesign of the company website', 5000.00, '2025-02-15', '2025-05-15', 'à faire', 1, 1);
+
 
 
 drop table tag ;

@@ -29,7 +29,7 @@ class UserModel   {
 }
 
 // $user = new User('user');
-// $specificUsers = $user->findBy(['id' => '1'], User::class);
+// $specificUsers = $user->findBy(['id' => '1'], UserModel::class);
 // $specificUsers = $user->read(User::class);
 // $user->create(["id"=>null, "username"=> "foullane", "email" => "foullane@gmail.com", "created_at" => time()]);
 // $user->update(["id"=>1, "username"=> "me", "email" => "me@gmail.com"]);

@@ -143,9 +143,9 @@ class ProjetModel {
      public function update()
      {
          $categorie = $this->categorie->getId();
-         $query = "UPDATE projet SET ,title = :title, description = :description, budget = :budget,date_debut=:date_debut,date_fin=:date_fin ,categorie_id = :categorie_id WHERE id = :id";
+         $query = "UPDATE projet SET title = :title, description = :description, budget=:budget,date_debut=:date_debut,date_fin=:date_fin ,categorie_id = :categorie_id WHERE id = :id";
          $stmt = Database::getInstance()->getConnection()->prepare($query);
-         $stmt->bindParam(":titre", $this->title);
+         $stmt->bindParam(":title", $this->title);
          $stmt->bindParam(":description", $this->description);
          $stmt->bindParam(":budget", $this->budget);
          $stmt->bindParam(":date_debut", $this->date_debut);
@@ -153,15 +153,17 @@ class ProjetModel {
          $stmt->bindParam(":categorie_id", $categorie);
          $stmt->bindParam(":id", $this->id);
          if ($stmt->execute()) {
-             $stmt = Database::getInstance()->getConnection()->prepare("DELETE FROM courstags WHERE id_cours = :id");
+             $stmt = Database::getInstance()->getConnection()->prepare("DELETE FROM projet_tag WHERE projet_id = :id");
              $stmt->bindParam(":id", $this->id);
              $stmt->execute();
              foreach ($this->tag as $tag) {
                  $tagId = $tag->getId();
                  $query = "INSERT INTO projet_tag (tag_id,projet_id) VALUES (:tag_id, :projet_id)";
                  $stmt = Database::getInstance()->getConnection()->prepare($query);
+                
                  $stmt->bindParam(":tag_id", $tagId);
                  $stmt->bindParam(":projet_id", $this->id);
+                 
                  $stmt->execute();
              }
  

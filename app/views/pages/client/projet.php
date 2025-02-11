@@ -395,7 +395,7 @@
           </div>
         </div>
          <!-- Add the Update button -->
-      <button class="update-btn" onclick="showUpdateForm(<?= $projet->getId() ?>, '<?= $projet->getTitle() ?>', '<?= $projet->getDescription() ?>', '<?= $projet->getBudget() ?>', '<?= $projet->getDateDebut() ?>', '<?= $projet->getDateFin() ?>')">Modifier</button>
+      <button  name ="id" class="update-btn" onclick="showUpdateForm(<?= $projet->getId() ?>, '<?= $projet->getTitle() ?>', '<?= $projet->getDescription() ?>', '<?= $projet->getBudget() ?>', '<?= $projet->getDateDebut() ?>', '<?= $projet->getDateFin() ?>')">Modifier</button>
     </div>
   <?php endforeach; ?>
      
@@ -407,8 +407,8 @@
   <div class="form-container">
     <button class="close-btn" onclick="closeUpdateForm()">&times;</button>
     <h2>Mettre à jour le projet</h2>
-    <form method="POST" action="/Projet/update" id="updateProjectForm">
-      <input type="hidden" name="project_id" id="updateProjectId">
+    <form method="POST" action="/Projet/update?id=<?= $projet->getId() ?>" id="updateProjectForm">
+      <input type="hidden" name="id" id="updateProjectId">
 
       <div class="form-group">
         <label>Titre</label>

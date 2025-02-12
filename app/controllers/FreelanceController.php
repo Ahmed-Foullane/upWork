@@ -10,4 +10,9 @@ $this->freelanceModel = new FreelanceModel();
     }
 }
 
+      public function create(){
+        $
+        $this->freelanceModel->()
+      }
+
 ?>

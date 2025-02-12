@@ -241,14 +241,41 @@
     .dates > div {
       flex: 1;
     }
+
+    /* Search bar style */
+    .search-bar {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .search-input {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
+      
       <h1>Projets</h1>
+      <!-- Search bar -->
+      <form action="/Freelancre/" method="get"></form>
+        <div class="search-bar"></div>
+          <input type="text" id="searchInput" class="search-input" name="search" placeholder="Rechercher par nom de projet..." onkeyup="searchProjectsByName()">
+        </div>
+      </form>
       <button class="add-btn" onclick="document.getElementById('formModal').classList.add('active')">+ Nouveau Projet</button>
+      
     </div>
+
+    
+    
 
     <!-- Modal Form -->
     <div id="formModal" class="modal">
@@ -286,32 +313,33 @@
           <div class="form-group">
             <label>Catégorie</label>
             <select>
-              <option>Développement Web</option>
-              <option>Design</option>
-              <option>Marketing</option>
-              <option>Rédaction</option>
+              <?php foreach ($categories as $category):?>
+              <option><?= $category->getName();  ?></option>
+              <?php 
+    endforeach;
+     ?>
             </select>
           </div>
 
-          <div class="form-group">
-            <label>Tags</label>
-            <div class="tags-input">
-              <span class="tag">React</span>
-              <span class="tag">Design</span>
-              <span class="tag">UI/UX</span>
-            </div>
-          </div>
+          <div class="mb-3">
+                            <label class="form-label">Tags</label>
+                            <select class="form-multi-select form-select" name="tags[]" multiple>
+                                <?php foreach ($tags as $tag): ?>
+                                    <option value="<?= $tag->getId() ?>"><?= $tag->getName() ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
 
           <button type="submit" class="submit-btn">Publier le projet</button>
         </form>
       </div>
     </div>
 
-    <div class="projects-list">
-      <!-- Exemple de projets -->
+    <!-- Project list -->
+    <div class="projects-list" id="projectsList">
        <?php foreach ($projets  as $projet): ?>
         
-      <div class="project-card">
+      <div class="project-card" data-title="<?= strtolower($projet->getTitle()) ?>">
         <div class="project-header">
           <div class="project-title"><?= $projet->getTitle() ?></div>
           <div class="project-budget"><?= $projet->getBudget() ?></div>
@@ -325,15 +353,13 @@
           <span class="meta-item">Fin:<?= $projet->getDateFin() ?></span>
         </div>
         <div class="project-tags">
-        <?php
-
-       if (!empty($projet->getTag())): ?>
-         <?php foreach ($projet->getTag() as $tag): ?>
-           <span class="badge bg-primary"><?= ($tag->getName()) ?></span>
-        <?php endforeach; ?>
+        <?php if (!empty($projet->getTag())): ?>
+          <?php foreach ($projet->getTag() as $tag): ?>
+            <span class="badge bg-primary"><?= ($tag->getName()) ?></span>
+          <?php endforeach; ?>
         <?php else: ?>
-           <span>Aucun Tag</span>
-       <?php endif; ?>
+            <span>Aucun Tag</span>
+        <?php endif; ?>
         </div>
       </div>
       <?php endforeach; ?>
@@ -341,7 +367,27 @@
   </div>
 
   <script>
-    // Fermer le modal en cliquant en dehors
+    // Function to filter projects by title
+    // function searchProjects() {
+    //   var input, filter, projectsList, projects, projectTitle, i, txtValue;
+    //   input = document.getElementById("searchInput");
+    //   filter = input.value.toLowerCase();
+    //   projectsList = document.getElementById("projectsList");
+    //   projects = projectsList.getElementsByClassName("project-card");
+
+    //   for (i = 0; i < projects.length; i++) {
+    //     projectTitle = projects[i].getAttribute("data-title");
+    //     txtValue = projectTitle || projects[i].textContent || projects[i].innerText;
+    //     if (txtValue.toLowerCase().indexOf(filter) > -1) {
+    //       projects[i].style.display = "";
+    //     } else {
+    //       projects[i].style.display = "none";
+    //     }
+    //   }
+    // }
+
+    // Close modal when clicking outside
+
     document.querySelector('.modal').addEventListener('click', function(e) {
       if (e.target === this) {
         this.classList.remove('active');

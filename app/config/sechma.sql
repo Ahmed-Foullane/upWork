@@ -68,20 +68,27 @@ CREATE TABLE paiement (
 
 INSERT INTO categorie (name) 
 VALUES ('Web Development');
-INSERT INTO tag (name, description) 
-VALUES ('Frontend', 'Frontend web development technologies');
+
+select * from categorie;
+INSERT INTO tag (name) 
+VALUES ('Frontend');
 CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
     name VARCHAR(50) ,
     description TEXT
  );
+SELECT * FROM USERS ;
+
 
 INSERT INTO Users (first_name, last_name, email, password, photo, bio, role)
 VALUES ('John', 'Doe', 'john.doe@example.com', 'password123', 'john_doe.jpg', 'A passionate web developer', 'freelance');
 INSERT INTO projet (title, description, budget, date_debut, date_fin, status, categorie_id, client_id)
 VALUES 
-('Website Redesign', 'A complete redesign of the company website', 5000.00, '2025-02-15', '2025-05-15', 'à faire', 1, 1);
+('Website Redesign', 'A complete redesign of the company website', 5000.00, '2025-02-15', '2025-05-15', 'à faire', 2, 1);
 
+INSERT INTO projet (title, description, budget, date_debut, date_fin, status, categorie_id, client_id)
+VALUES 
+('Website Redesign', 'A complete redesign of the company website', 5000.00, '2025-02-15', '2025-05-15', 'à faire', 2, 1);
 
 
 drop table tag ;

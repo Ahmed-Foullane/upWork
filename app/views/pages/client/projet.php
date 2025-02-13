@@ -367,24 +367,24 @@
   </div>
 
   <script>
-    // Function to filter projects by title
-    // function searchProjects() {
-    //   var input, filter, projectsList, projects, projectTitle, i, txtValue;
-    //   input = document.getElementById("searchInput");
-    //   filter = input.value.toLowerCase();
-    //   projectsList = document.getElementById("projectsList");
-    //   projects = projectsList.getElementsByClassName("project-card");
+    Function to filter projects by title
+    function searchProjects() {
+      var input, filter, projectsList, projects, projectTitle, i, txtValue;
+      input = document.getElementById("searchInput");
+      filter = input.value.toLowerCase();
+      projectsList = document.getElementById("projectsList");
+      projects = projectsList.getElementsByClassName("project-card");
 
-    //   for (i = 0; i < projects.length; i++) {
-    //     projectTitle = projects[i].getAttribute("data-title");
-    //     txtValue = projectTitle || projects[i].textContent || projects[i].innerText;
-    //     if (txtValue.toLowerCase().indexOf(filter) > -1) {
-    //       projects[i].style.display = "";
-    //     } else {
-    //       projects[i].style.display = "none";
-    //     }
-    //   }
-    // }
+      for (i = 0; i < projects.length; i++) {
+        projectTitle = projects[i].getAttribute("data-title");
+        txtValue = projectTitle || projects[i].textContent || projects[i].innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+          projects[i].style.display = "";
+        } else {
+          projects[i].style.display = "none";
+        }
+      }
+    }
 
     // Close modal when clicking outside
 

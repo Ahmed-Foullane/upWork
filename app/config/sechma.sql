@@ -66,7 +66,19 @@ CREATE TABLE paiement (
     montant DOUBLE,
     date date,
     status status,
-)
+);
+CREATE TABLE candidateur(
+    id SERIAL PRIMARY KEY ,
+    description TEXT,
+    budget DECIMAL(10,2),
+    date_debut DATE,
+    date_fin DATE,
+    freelance_id int,
+    projet_id int ,
+    Foreign Key (freelance_id) REFERENCES Users (id),
+    Foreign Key (projet_id) REFERENCES  projet (id)
+
+) ;
 
 
 drop table tag ;

@@ -8,18 +8,20 @@ use AllowDynamicProperties;
 
 class ProjetModel {
     
-    private $id;
-    private $title;
+    private   $id;
+    private  $title;
     private  $budget;
     private $description;
     private $date_debut;
     private $date_fin;
     private $status;
+    private array $candidateur;
     private CategorieModel $categorie;
     private array $tag;
     private UserModel $client;
     public function __construct() {
     }
+    
     public function getId(): int
     {
         return $this->id;

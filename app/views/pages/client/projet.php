@@ -367,7 +367,7 @@
   </div>
 
   <script>
-    Function to filter projects by title
+    // Function to filter projects by title
     function searchProjects() {
       var input, filter, projectsList, projects, projectTitle, i, txtValue;
       input = document.getElementById("searchInput");

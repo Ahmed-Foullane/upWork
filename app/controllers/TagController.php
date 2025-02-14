@@ -10,12 +10,15 @@ class TagController {
     public function index(){
         $cat = new TagController();
         $tags = $cat->getAllTag();
-        include_once '..\app\views\pages\client\Tag.php';
+        ob_start();
+        include '..\app\views\pages\client\nav.php';
+        
+        
+        include '..\app\views\pages\client\Tag.php';
         }
     public function getAllTag(){
         $tags=$this->TagModel->getAllTag();
         return $tags;
-        
     }
 
     public function addTag(){

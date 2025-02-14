@@ -97,9 +97,10 @@ class ProjetModel {
     }
     public function getAll(){
         $query = 'SELECT projet.id AS id, projet.title AS title, projet.description AS description,
-        projet.budget AS budget, projet.date_debut, projet.date_fin, categorie.name as cat
-        FROM projet
-        JOIN categorie ON projet.categorie_id = categorie.id;';
+        projet.budget AS budget, projet.date_debut, projet.date_fin,projet.status, categorie.name as cat,
+        users.first_name AS first_name , users.photo AS photo  FROM projet
+        JOIN categorie ON projet.categorie_id = categorie.id
+        JOIN users ON projet.client_id = users.id;';
         $stmt = Database::getInstance()->getConnection()->prepare($query);
         $stmt->execute();
         $projets = $stmt->fetchAll(PDO::FETCH_CLASS, ProjetModel::class);
@@ -118,11 +119,9 @@ class ProjetModel {
      {
          $categorie = $this->categorie->getId();
         //  $client = $this->getclient()->getId();
-         $query = "INSERT INTO projet (title,description,budget,date_debut,date_fin,categorie_id) VALUES (:title,:description,:budget,:date_debut,:date_fin,:categorie_id);";
-         
+         $query = "INSERT INTO projet (title,description,budget,date_debut,date_fin,categorie_id) VALUES 
+         (:title,:description,:budget,:date_debut,:date_fin,:categorie_id);";
          $stmt = Database::getInstance()->getConnection()->prepare($query);
-         
-         
          $stmt->bindParam(":title", $this->title);
          $stmt->bindParam(":description", $this->description);
          $stmt->bindParam(":budget", $this->budget);
@@ -145,7 +144,7 @@ class ProjetModel {
      public function update()
      {
          $categorie = $this->categorie->getId();
-         $query = "UPDATE projet SET title = :title, description = :description, budget=:budget,date_debut=:date_debut,date_fin=:date_fin ,categorie_id = :categorie_id WHERE id = :id";
+         $query = "UPDATE projet SET title = :title, description =:description, budget=:budget,date_debut=:date_debut,date_fin=:date_fin ,categorie_id = :categorie_id WHERE id = :id";
          $stmt = Database::getInstance()->getConnection()->prepare($query);
          $stmt->bindParam(":title", $this->title);
          $stmt->bindParam(":description", $this->description);

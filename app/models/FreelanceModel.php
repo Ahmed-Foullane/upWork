@@ -3,11 +3,26 @@ namespace app\Models;
 use app\config\Database;
 use PDO;
 class FreelanceModel {
-    protected $conn;
+    private $conn;
+    private $id;
 
 
     public function __construct() {
         $this->conn = Database::getInstance()->getConnection();
+    }
+
+    public function __call($name, $arguments) {
+        if($name == "FreelanceModelCall"){
+            if(count($arguments) == 1){
+                $this->id = $arguments[0];
+            } 
+        }
+        }
+    public function setId($id){
+        $this->id=$id;
+    }
+    public function getId(){
+        return  $this->id;
     }
 
     public function searchProjectsByName($name, $className) {

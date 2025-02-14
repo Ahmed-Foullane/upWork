@@ -12,8 +12,7 @@ SELECT * FROM categorie;
 
 CREATE TABLE tag (
     id SERIAL PRIMARY KEY ,
-
-    name VARCHAR(50) 
+    name VARCHAR(50) ,
     description TEXT
 
  );
@@ -25,7 +24,7 @@ CREATE TABLE projet (
     budget DECIMAL(10,2),
     date_debut DATE,
     date_fin DATE,
-    status status DEFAULT 'en cours',  -- Default value for status is 'en cours'
+    status status DEFAULT 'en cours',  
     categorie_id INT,
     FOREIGN KEY (categorie_id) REFERENCES Categorie(id),
     client_id INT,
@@ -50,10 +49,25 @@ CREATE TABLE Users (
     bio VARCHAR (255),
    role role
 );
+CREATE TABLE freelance (
+    id SERIAL PRIMARY KEY,
+    portfolio varchar(255),
+    tuaxhoraire varchar (255),
+    user_id int ,
+    Foreign Key (user_id) REFERENCES Users (id)
+
+);
 CREATE TABLE competence(
     id SERIAL PRIMARY KEY ,
     name varchar(50),
     rating float
+);
+
+CREATE TABLE freelance_competence(
+    freelance_id int,
+    competence_id int,
+    FOREIGN KEY (freelance_id) REFERENCES freelance (id),
+    FOREIGN KEY (competence_id) REFERENCES competence (id)
 );
 CREATE TABLE Avis (
     id SERIAL PRIMARY KEY,
@@ -67,6 +81,7 @@ CREATE TABLE paiement (
     date date,
     status status,
 );
+
 CREATE TABLE candidateur(
     id SERIAL PRIMARY KEY ,
     description TEXT,
@@ -75,7 +90,7 @@ CREATE TABLE candidateur(
     date_fin DATE,
     freelance_id int,
     projet_id int ,
-    Foreign Key (freelance_id) REFERENCES Users (id),
+    Foreign Key (freelance_id) REFERENCES freelance (id),
     Foreign Key (projet_id) REFERENCES  projet (id)
 
 ) ;
@@ -84,4 +99,4 @@ CREATE TABLE candidateur(
 drop table tag ;
 drop table categorie ;
 drop table projet ;
-drop table projet_tag ;
+select * from  candidateur ;

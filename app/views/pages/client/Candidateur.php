@@ -70,7 +70,7 @@
           <h5 class="modal-title" id="proposalModalLabel">Faire une proposition</h5>
         </div>
         <div class="modal-body">
-          <form>
+          <form method ="POST" action ="/Candidateur/create?project_id=<?php echo $_GET["projet_id"]; ?>">
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
               <textarea name ="description" class="form-control" id="description" rows="3" required></textarea>
@@ -90,12 +90,14 @@
               <label for="dateFin" class="form-label">Date de fin</label>
               <input name="date_fin" type="date" class="form-control" id="dateFin" required>
             </div>
-          </form>
+          
         </div>
         <div class="modal-footer">
+          <a href="">
           <button type="submit" class="btn btn-success">Envoyer </button>
-        </div>
+          </a> </div>
       </div>
+      </form>
     </div>
   </div>
 </body>

@@ -6,7 +6,6 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.9.0/dist/css/coreui.min.css" rel="stylesheet">
   <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.9.0/dist/js/coreui.bundle.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     .client-info {
       display: flex;
@@ -57,8 +56,8 @@
     }
 
     .update-btn {
-      
-      color: black;
+      background: #007bff;
+      color: white;
       border: none;
       padding: 10px 20px;
       border-radius: 5px;
@@ -303,7 +302,7 @@
       font-size: 16px;
     }
   </style>
-  <style>
+    <style>
     :root {
       --sidebar-width: 250px;
       --header-height: 60px;
@@ -499,7 +498,6 @@
       margin-bottom: 15px;
     }
 
-
     .project-title {
       font-size: 20px;
       font-weight: bold;
@@ -564,7 +562,7 @@
 </head>
 
 <body>
-  <div class="dashboard">
+<div class="dashboard">
     <!-- Sidebar Navigation -->
     <div class="sidebar">
       <div class="logo">Dashboard</div>
@@ -646,218 +644,7 @@
           <div class="card-value">5</div>
         </div>
       </div>
-      <!-- Rest of the HTML remains exactly the same as your original code -->
-      <div class="container">
-        <div class="header">
-          <h1>Projets</h1>
-          <div class="search-bar">
-          </div>
-          <button class="add-btn" onclick="document.getElementById('formModal').classList.add('active')">+ Nouveau Projet</button>
-        </div>
-
-        <!-- Modal Form -->
-        <div id="formModal" class="modal">
-          <div class="form-container">
-            <button class="close-btn" onclick="document.getElementById('formModal').classList.remove('active')">&times;</button>
-            <h2>Ajouter un nouveau projet</h2>
-            <form method="POST" action="/Projet/create">
-              <div class="form-group">
-                <label>Titre</label>
-                <input type="text" name="title" placeholder="Entrez le titre du projet">
-              </div>
-
-              <div class="form-group">
-                <label>Description</label>
-                <textarea name="description" rows="4" placeholder="Décrivez votre projet"></textarea>
-              </div>
-
-              <div class="form-group">
-                <label>Budget</label>
-                <input name="budget" type="number" placeholder="Entrez le budget">
-              </div>
-
-              <div class="dates">
-                <div class="form-group">
-                  <label>Date de début</label>
-                  <input name="date_debut" type="date">
-                </div>
-                <div class="form-group">
-                  <label>Date de fin</label>
-                  <input name="date_fin" type="date">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Catégorie</label>
-                <select name="categorie_id">
-                  <?php foreach ($categories as $category): ?>
-                    <option value="<?= $category->getId() ?>"><?= $category->getName();  ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Tags</label>
-                <select class="form-multi-select form-select" name="tags[]" multiple>
-                  <?php foreach ($tags as $tag): ?>
-                    <option value="<?= $tag->getId() ?>"><?= $tag->getName() ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-
-              <button type="submit" class="submit-btn">Publier le projet</button>
-            </form>
-          </div>
-        </div>
-
-        <!-- Project list -->
-        <div class="projects-list" id="projectsList">
-          <?php foreach ($projets as $projet): ?>
-            <div class="project-card" data-title="<?= strtolower($projet->getTitle()) ?>">
-              <div style="margin :20px; " class="d-flex justify-content-between" class="project-card">
-                <div>
-                  <img src="<?= $projet->photo ?>" alt="Photo du projet">
-                  <h1 class="project-title"><?= $projet->first_name ?></h1>
-                  
-                </div>
-                <h5 style="width : 60px ; height :20px" class="badge bg-info-subtle " class="project-card__status"><?= $projet->getstatus() ?></h5>
-                
-              </div>
-              <div class="project-header">
-                <h5 class="project-title"><?= $projet->getTitle() ?>
-                <form method ="get" action="/candidateur/getAll">
-                <input name="projet_id" value="<?= $projet->getId() ?>" type="hidden">
-                <button style ="width :40px;Background-color:white ; border : none;"><i class="fa-duotone fa-solid fa-eye"></i></button>
-              </h5>
-              </form>
-                <div class="project-budget"><?= $projet->getBudget() ?></div>
-              </div>
-              
-              <div class="project-description">
-                <?= $projet->getDescription() ?>
-              </div>
-              <div class="project-meta">
-                <span class="meta-item"><?= ($projet->cat) ?></span>
-                <span class="meta-item">Début<?= $projet->getDateDebut() ?></span>
-                <span class="meta-item">Fin:<?= $projet->getDateFin() ?></span>
-              </div>
-              <div class="project-tags">
-                <?php if (!empty($projet->getTag())): ?>
-                  <?php foreach ($projet->getTag() as $tag): ?>
-                    <span class="badge bg-primary"><?= ($tag->getName()) ?></span>
-                  <?php endforeach; ?>
-                <?php else: ?>
-                  <span>Aucun Tag</span>
-                <?php endif; ?>
-              </div>
-
-              <div style="height:40px; margin-top:10px; " class="d-flex justify-content-between align-items-center">
-                <div style="margin-top: 20px;">
-                  <button class="update-btn bg-warning" onclick="showUpdateForm(<?= $projet->getId() ?>, '<?= $projet->getTitle() ?>', '<?= $projet->getDescription() ?>', '<?= $projet->getBudget() ?>', '<?= $projet->getDateDebut() ?>', '<?= $projet->getDateFin() ?>')">Modifier</button>
-                  <button style="width: 100px;" type="submit" class="btn btn-danger">suprimer</button>
-                </div>
-                <form action="/Candidateur" method="get">
-                  <input name="projet_id" value="<?= $projet->getId() ?>" type="hidden">
-                  <button style="width: 70px;" type="submit" class="btn btn-success">Apply</button>
-                </form>
-
-              </div>
-            </div>
-          <?php endforeach; ?>
-        </div>
-      </div>
-
-      <!-- Modal for updating project -->
-      <?php foreach ($projets as $projet): ?>
-        <div id="updateProjectModal" class="modal">
-          <div class="form-container">
-            <button class="close-btn" onclick="closeUpdateForm()">&times;</button>
-            <h2>Mettre à jour le projet</h2>
-            <form method="POST" action="/Projet/update?id=<?= $projet->getId() ?>" id="updateProjectForm">
-              <input type="hidden" name="id" id="updateProjectId">
-
-              <div class="form-group">
-                <label>Titre</label>
-                <input type="text" name="title" value="<?= $projet->getTitle() ?>" id="updateTitle" placeholder="Entrez le titre du projet">
-              </div>
-
-              <div class="form-group">
-                <label>Description</label>
-                <textarea name="description" value="<?= $projet->getDescription() ?>" id="updateDescription" rows="4" placeholder="Décrivez votre projet"></textarea>
-              </div>
-
-              <div class="form-group">
-                <label>Budget</label>
-                <input name="budget" type="number" value="<?= $projet->getbudget() ?>" id="updateBudget" placeholder="Entrez le budget">
-              </div>
-
-              <div class="dates">
-                <div class="form-group">
-                  <label>Date de début</label>
-                  <input name="date_debut" value="<?= $projet->getDateDebut() ?>" type="date" id="updateStartDate">
-                </div>
-                <div class="form-group">
-                  <label>Date de fin</label>
-                  <input name="date_fin" value="<?= $projet->getDateFin() ?>" type="date" id="updateEndDate">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Catégorie</label>
-                <select name="categorie_id" id="updateCategory">
-                  <?php foreach ($categories as $category): ?>
-                    <option value="<?= $category->getId() ?>"><?= $category->getName() ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Tags</label>
-                <select class="form-multi-select form-select" name="tags[]" multiple>
-                  <?php foreach ($tags as $tag): ?>
-                    <option value="<?= $tag->getId() ?>"><?= $tag->getName() ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-
-              <button type="submit" class="submit-btn">Mettre à jour le projet</button>
-            </form>
-          <?php endforeach; ?>
-          </div>
-        </div>
-
-        <script>
-          function showUpdateForm(projectId, title, description, budget, startDate, endDate) {
-            document.getElementById('updateProjectId').value = projectId;
-            document.getElementById('updateTitle').value = title;
-            document.getElementById('updateDescription').value = description;
-            document.getElementById('updateBudget').value = budget;
-            document.getElementById('updateStartDate').value = startDate;
-            document.getElementById('updateEndDate').value = endDate;
-            document.getElementById('updateProjectModal').classList.add('active');
-          }
-
-          // Fonction pour fermer le formulaire de mise à jour
-          function closeUpdateForm() {
-            document.getElementById('updateProjectModal').classList.remove('active');
-          }
-
-          // Event listeners pour la fermeture des modals
-          document.addEventListener('DOMContentLoaded', function() {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-              modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                  this.classList.remove('active');
-                }
-              });
-            });
-          });
-        </script>
-
-
-
-
+      
+   
 </body>
-
 </html>

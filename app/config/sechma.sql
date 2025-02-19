@@ -37,17 +37,18 @@ CREATE TABLE tag (
  );
 
  CREATE TYPE role AS ENUM ('client','freelance','admin');
+insert into Users (name, email, password, role) VALUES ('ahmed', "ahmed@gmial.com", "123", "admin");
 
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY ,
-    first_name varchar(50),
-    last_name varchar(50),
+    name varchar(50),
     email varchar(255) UNIQUE,
     password varchar (50),
-    photo VARCHAR (50),
-    bio VARCHAR (255),
-   role role
+    role VARCHAR(50)
 );
+
+select * FROM Users;
+
 CREATE TABLE competence(
     id SERIAL PRIMARY KEY ,
     name varchar(50),
@@ -74,3 +75,6 @@ drop table tag ;
 drop table categorie ;
 drop table projet ;
 drop table projet_tag ;
+
+SELECT * from tag;
+SELECT * from Users;

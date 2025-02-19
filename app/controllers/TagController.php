@@ -1,38 +1,35 @@
 <?php
 namespace app\controllers;
-use app\Models\TagModel;
+use app\views\pages\admin\tag;
+use app\models\TagModel;
+
 class TagController {
-    public $TagModel;
-    function __construct()
-    {
+    private $TagModel;
+    public function __construct(){
         $this->TagModel = new TagModel();
     }
+
     public function index(){
-        $cat = new TagController();
-        $tags = $cat->getAllTag();
-        include_once '..\app\views\pages\client\Tag.php';
+        include_once '../app/views/pages/admin/tag.php';
         }
-    public function getAllTag(){
-        $tags=$this->TagModel->getAllTag();
-        return $tags;
-        
-    }
 
-    public function addTag(){
+    public function createTag(){
+       
         $name = $_POST["name"];
-        $description = $_POST["description"];
-        $this->TagModel->setTag($name,$description);
+        $this->TagModel->createTag($name);
         header("location: /Tag");
-
-
     }
-    public function deleteTag($id){ 
-      
-            $this->TagModel->deleteTag($id);
-           header("location: /Tag");
-     }
-    public function updateTag($id,$name,$description){
-        $this->TagModel->updateTag($id,$name,$description);
+    
+    public function deletTag($id){
+        $this->TagModel->deleteTag($id);
         header("location: /Tag");
-    } 
+    }
+
+    public function updateTag(){
+       $name = $_POST["name"];
+       $id = $_POST["id"];
+        $this->TagModel->updateTag($name, $id);
+        header("location: /Tag");
+    }
 }
+

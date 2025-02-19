@@ -38,8 +38,8 @@
             </div>
           </div>
           <div class="header_right_btns">
-            <button class="btn_primary">Log In</button
-            ><button class="btn_secondary">Sign Up</button>
+          <a href="/login"> <button class="btn_primary">Log In</button></a>
+          <a href="/register"><button class="btn_secondary">Sign Up</button></a>  
           </div>
         </div>
       </div>
